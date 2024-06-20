@@ -39,7 +39,7 @@ export class EventsService {
     })
   }
 
-  @HttpCode(200)
+  
   remove(id: string) {
     return this.prismaService.event.delete({
       where: {id},
