@@ -1,4 +1,4 @@
-import { HttpCode, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -39,7 +39,7 @@ export class EventsService {
     })
   }
 
-  @HttpCode(200)
+  
   remove(id: string) {
     return this.prismaService.event.delete({
       where: {id},
