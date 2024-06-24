@@ -1,0 +1,72 @@
+# Testando a criação de um evento
+# @name createEvent
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+  "name": "Tech Conference 2025",
+  "description": "A conference about the latest in tech.",
+  "date": "2025-12-01T10:00:00Z",
+  "price": 500
+}
+
+###
+
+# Variável de ID do evento criada a partir da resposta da requisição anterior
+@eventId = {{createEvent.response.body.id}}
+
+###
+
+# Testando a listagem de todos os eventos
+GET http://localhost:3000/events
+
+###
+
+# Testando a obtenção de um evento específico por ID
+GET http://localhost:3000/events/f0598c99-b13e-40c7-89b4-a426092ae697
+
+###
+
+# Testando a atualização de um evento
+PATCH http://localhost:3000/events/f0598c99-b13e-40c7-89b4-a426092ae697
+Content-Type: application/json
+
+{
+  "name": "Tech Conference 2024 - Updated",
+  "description": "An updated description about the latest in tech.",
+  "date": "2024-12-02T10:00:00Z",
+  "price": 600
+}
+
+###
+
+# Testando a remoção de um evento
+DELETE http://localhost:3000/events/f0598c99-b13e-40c7-89b4-a426092ae697
+
+###
+
+# Testando a reserva de vagas para um evento
+POST http://localhost:3000/events/d0d85d81-9248-4108-b96c-b87013107704/reserve
+Content-Type: application/json
+
+{
+  "spots": ["A2", "A3"],
+  "ticket_kind": "full",
+  "email": "yuri@gmail.com"
+}
+
+###
+
+# Testando a criação de um spot
+# @name createSpot
+POST http://localhost:3000/spots/d0d85d81-9248-4108-b96c-b87013107704/spots
+Content-Type: application/json
+
+{
+  "name": "A3"
+}
+
+###
+
+# Testando a listagem de todos os spots para um evento específico
+GET http://localhost:3000/spots/d0d85d81-9248-4108-b96c-b87013107704/spots
