@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { ReserveSpotDto } from './dto/reserve-spot.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma, SpotStatus, TicketStatus } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class EventsService {
@@ -70,7 +70,7 @@ export class EventsService {
     try {
 
 
-      const tickets = this.prismaService.$transaction(async (prisma) => {
+      const tickets = await this.prismaService.$transaction(async (prisma) => {
 
         await prisma.reservationHistory.createMany({
           data: spots.map((spot) => ({
@@ -105,7 +105,8 @@ export class EventsService {
 
         return tickets;
 
-      });
+      }, {isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted}
+    );
 
       return tickets;
     } catch (e) {

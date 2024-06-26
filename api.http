@@ -46,11 +46,11 @@ DELETE http://localhost:3000/events/f0598c99-b13e-40c7-89b4-a426092ae697
 ###
 
 # Testando a reserva de vagas para um evento
-POST http://localhost:3000/events/d0d85d81-9248-4108-b96c-b87013107704/reserve
+POST http://localhost:3000/events/f3b7ad67-7402-4885-a5eb-eb1ecf9a1c82/reserve
 Content-Type: application/json
 
 {
-  "spots": ["A2", "A3"],
+  "spots": ["A1"],
   "ticket_kind": "full",
   "email": "yuri@gmail.com"
 }
@@ -59,14 +59,14 @@ Content-Type: application/json
 
 # Testando a criação de um spot
 # @name createSpot
-POST http://localhost:3000/spots/d0d85d81-9248-4108-b96c-b87013107704/spots
+POST http://localhost:3000/spots/f3b7ad67-7402-4885-a5eb-eb1ecf9a1c82/spots
 Content-Type: application/json
 
 {
-  "name": "A3"
+  "name": "A1"
 }
 
 ###
 
 # Testando a listagem de todos os spots para um evento específico
-GET http://localhost:3000/spots/d0d85d81-9248-4108-b96c-b87013107704/spots
+GET http://localhost:3000/spots/f3b7ad67-7402-4885-a5eb-eb1ecf9a1c82/spots
